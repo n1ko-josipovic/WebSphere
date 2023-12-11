@@ -4,14 +4,9 @@
 :root {
   --primary-font: 'Poppins', sans-serif;
   --secondary-font: 'Black Ops One', cursive;
-  --main-color: white;
-  --primary-color: rgb(16, 15, 23);
-  --accent-color: mediumpurple;
-  --accent-light: black;
-  --accent-dark: rgb(161, 119, 252);
-  
-  --spacing: 0rem clamp(1rem, 2vw, 3rem);
-  --radius: clamp(0.4rem, 0.75vw, 1rem);
+  --background-color: rgb(16, 15, 23);
+  --purple-medium: mediumpurple;
+  --purple-light: rgb(161, 119, 252);
 }
 
 * {
@@ -23,12 +18,63 @@
 }
 
 html {
-  background: var(--primary-color);
-  overflow: hidden;
+  background: var(--background-color);
+  overflow-x: hidden;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.item {
+  width: 300px;
+  height: 200px;
+  list-style-type: none;
+  position: absolute;
+  top: calc(5% + 150px);
+  left: 80%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+  transition: all 0.5s;
+  
+  &:nth-child(1), &:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  &:nth-child(3) { top: calc(5% + 100px); }
+  &:nth-child(4) { top: calc(5% + 320px); }
+  &:nth-child(5) { top: calc(5% + 540px); }
+  &:nth-child(6) { top: calc(5% + 760px); }
+  &:nth-child(7) { top: calc(5% + 980px); opacity: 0; }
+  &:nth-child(8) { top: calc(5% + 1200px); opacity: 0; }
+  &:nth-child(9) { top: calc(5% + 1420px); opacity: 0; }
+  &:nth-child(10) { top: calc(5% + 1640px); opacity: 0; }
+  &:nth-child(11) { top: calc(5% + 1860px); opacity: 0; }
 }
 
 #particles-js{
@@ -39,149 +85,114 @@ html {
   z-index: 2;
 }
 
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transition: all 0.3s ease;
-}
+.content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font: var(--primary-font);
+  color: white;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  opacity: 0;
+  display: none;
 
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.common-heading {
-  font-family: var(--secondary-font);
-  font-size: clamp(3rem, 7vw, 10rem);
-  color: var(--main-color);
-  padding: var(--spacing);
-  border-radius: var(--radius);
-  margin: 0rem;
-  transition: all 0.5s ease;
-  position: relative;
-  z-index: 3;
-}
-
-.small-text {
-  font-size: clamp(3rem, 5.5vw, 10rem);
-}
-
-.sidebar .links li a {
-  width: auto;
-}
-
-
-h4 {
-    color: aquamarine;
-    display: none;
-    margin-bottom: 12.5px;
+  & .LV {
+    line-height: 1.7;
+    margin: 1rem 0 1.5rem;
+    font-size: 1.1rem;
     position: relative;
-    left: 5.75%;
+    width: fit-content;
+    
+    top: 15%;
+    left: 10%;
+    text-decoration: none;
+    color: white;
+    font-weight: 550;
+    padding: 10px 15px;
+    transition: color 0.5s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    &:hover{
+      color: #ff0000;
+      font-weight: 600;
+    }
+  }
+
+  & .title{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+
+    position: relative;
+    left: 75px;
+    top: 75px;
+
+    font-family: var(--secondary-font);
+    font-size: clamp(3rem, 6vw, 10rem);
+    padding: 0rem clamp(1rem, 2vw, 3rem);
+    border-radius: clamp(0.4rem, 0.75vw, 1rem);
+    color: white;
+
+    z-index: 9;
+  }
+
+  & .mini-title{
+    position: absolute;
+    bottom: 125px;
+    left: 45%;
+    transform: translateX(-50%);
+    font-size: 1.7rem;
+    font-weight: 750;
+    transition: all 0.5s ease;
+  }
 }
 
-hr {
-  border: 1px solid rgb(161, 119, 252);
-  margin: 10px 8px;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 90px;
-  height: 100%;
-  border-right: 1px solid rgb(161, 119, 252);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  transition: all 0.5s ease;
-  z-index: 3;
-}
-
-.sidebar.expanded {
-  width: 270.05px;
-}
-
-.sidebar.expanded .links li a,
-.sidebar.expanded h4 {
+.item:nth-of-type(2) .content {
   display: block;
+  animation: show 0.5s ease-in-out 0.5s forwards;
+}
+
+@keyframes show {
+  0% {
+    filter: blur(5px);
+    transform: translateY(calc(-50% + 75px));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.nav {
+  position: absolute;
+  bottom: 60px;
+  left: 45%;
+  transform: translateX(-50%);
+  user-select: none;
+  z-index: 5;
+  display: inline;
   transition: all 0.5s ease;
+
+  & .btn {
+    background-color: rgba(0, 0, 0, 0.35);
+    color: crimson;
+    padding: 10px 10px;
+    margin-left: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    transition: visibility 0s, opacity 0.5s linear, background-color 0.5s linear;
+
+    &:hover {
+      background-color: black;
+    }
+  }
+  
+  & .hidden {
+    position: absolute;
+    left: 45%;
+    transform: translateX(-50%);
+    visibility: hidden;
+  }
 }
-
-.sidebar.expanded hr {
-  border-color: transparent;
-}
-
-.links {
-  list-style: none;
-  margin-top: 20px;
-  overflow-y: scroll;
-  height: 100%;
-}
-
-.links li {
-  cursor: pointer;
-  display: flex;
-  border-radius: 4px;
-  align-items: center;
-  transition: 0.3s ease;
-  position: relative;
-}
-
-.links span {
-  padding: 12px 10px;
-  position: relative;
-}
-
-.links li a {
-  color: white;
-  font-weight: 300;
-  text-decoration: none;
-  padding: 10px 20px;
-  white-space: nowrap;
-  display: none;
-}
-
-.links li:hover {
-  background: var(--accent-light);
-}
-
-
-.top-sidebar {
-  display: flex;
-  align-items: center;
-}
-
-.top-sidebar span {
-  cursor: pointer;
-  display: flex;
-  border-radius: 4px;
-  align-items: center;
-  transition: 0.3s ease;
-}
-
-#closeButton{
-  display: none;
-}
-
-#menuButton:hover,
-#closeButton:hover {
-  background: black;
-}
-
-#websiteName {
-  display: none;
-  color: white;
-  margin-left: 20px;
-}
-
-.tooltip {
-  display: none;
-}
-

@@ -28,89 +28,80 @@ async function revealWordLetterByLetter(element) {
   }
 }
 
-const aElements = document.querySelectorAll('a.hoverable');
-const container = document.querySelector('.container');
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const cEffectElements = document.querySelectorAll('.c-effect');
+  
+    cEffectElements.forEach((cEffectElement) => {
+      revealWordLetterByLetter(cEffectElement);
+    });
+  }, 475);
+});
 
-let h1Element;
 
-aElements.forEach((aElement) => {
+const h2Elements = document.querySelectorAll('.hoverable');
+const container = document.querySelector('.tooltip-container');
+
+let h2Element;
+h2Elements.forEach((aElement) => {
   aElement.addEventListener('mouseover', () => {
     const tooltipText = aElement.nextElementSibling.innerText;
-    h1Element = document.createElement('h1');
-    h1Element.classList.add('common-heading', 'c-effect', 'small-text');
-    h1Element.dataset.value = tooltipText;
-    container.appendChild(h1Element);
-    revealWordLetterByLetter(h1Element);
+    h2Element = document.createElement('h2');
+    h2Element.classList.add('mini-title', 'c-effect');
+    h2Element.innerText = tooltipText;
+    container.appendChild(h2Element);
   });
 
   aElement.addEventListener('mouseout', () => {
-    if (h1Element) {
-      h1Element.remove();
+    if (h2Element) {
+      h2Element.remove();
     }
   });
 });
 
 
 
+const slider = document.querySelector('.slider');
+
+function activate(e) {
+  const items = document.querySelectorAll('.item');
+  e.target.matches('.next') && slider.append(items[0])
+  e.target.matches('.prev') && slider.prepend(items[items.length-1]);
+}
+
+document.addEventListener('click',activate,false);
 
 
+document.addEventListener('DOMContentLoaded', function () {
+  const exploreButton = document.querySelector('.b-toggle');
+  const hiddenButtons = document.querySelectorAll('.btn.hidden');
 
-document.addEventListener("DOMContentLoaded", () => {
-  const lines = document.querySelectorAll('.line');
-  lines.forEach(line => line.classList.add('activate'));
-
-  const elementsWithCEffectClass = document.querySelectorAll(".c-effect");
-  const menuButton = document.getElementById('menuButton');
-  const closeButton = document.getElementById('closeButton');
-  const websiteName = document.getElementById('websiteName');
-  const sidebar = document.querySelector('.sidebar');
-
-  elementsWithCEffectClass.forEach(revealWordLetterByLetter);
-
-  menuButton.addEventListener('click', toggleSidebar);
-  closeButton.addEventListener('click', closeSidebar);
-
-  function toggleSidebar() {
-    sidebar.classList.toggle('expanded');
-    toggleElementsDisplay();
-    toggleEffects();
-  }
-
-  function closeSidebar() {
-    sidebar.classList.remove('expanded');
-    toggleElementsDisplay();
-    toggleEffects();
-  }
-
-  function toggleElementsDisplay() {
-    menuButton.style.display = sidebar.classList.contains('expanded') ? 'none' : 'block';
-    websiteName.style.display = sidebar.classList.contains('expanded') ? 'block' : 'none';
-    closeButton.style.display = sidebar.classList.contains('expanded') ? 'block' : 'none';
-  }
-
-  function toggleEffects() {
-    elementsWithCEffectClass.forEach(effect => effect.classList.toggle('move'));
-  }
+  exploreButton.addEventListener('click', function () {
+    hiddenButtons.forEach(button => {
+      button.classList.toggle('hidden');
+    });
+  });
 });
+
+
 
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 80,
+      "value": 360,
       "density": {
         "enable": true,
-        "value_area":1000
+        "value_area": 850
       }
     },
     "color": {
-      "value": ["#aa73ff", "#f8c210", "#83d238", "#33b1f8", "#9370db", "#f8c210", "#990000", "#7fffd4"]
+      "value": ["#fbb03b", "#ffffff"]
     },
-    
     "shape": {
       "type": "circle",
       "stroke": {
         "width": 0,
-        "color": "#fff"
+        "color": "#000000"
       },
       "polygon": {
         "nb_sides": 5
@@ -122,12 +113,12 @@ particlesJS("particles-js", {
       }
     },
     "opacity": {
-      "value": 0.6,
+      "value": 0.75,
       "random": false,
       "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
+        "enable": true,
+        "speed": 0.2,
+        "opacity_min": 0,
         "sync": false
       }
     },
@@ -135,44 +126,59 @@ particlesJS("particles-js", {
       "value": 2,
       "random": true,
       "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
+        "enable": true,
+        "speed": 2.5,
+        "size_min": 0,
         "sync": false
       }
     },
     "line_linked": {
-      "enable": true,
-      "distance": 120,
+      "enable": false,
+      "distance": 150,
       "color": "#ffffff",
       "opacity": 0.4,
       "width": 1
     },
+    "move": {
+      "enable": true,
+      "speed": 0.15,
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
   },
   "interactivity": {
     "detect_on": "canvas",
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "grab"
+        "mode": "bubble"
       },
       "onclick": {
-        "enable": false
+        "enable": true,
+        "mode": "push"
       },
       "resize": true
     },
     "modes": {
       "grab": {
-        "distance": 140,
+        "distance": 400,
         "line_linked": {
           "opacity": 1
         }
       },
       "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
+        "distance": 83.91608391608392,
+        "size": 1,
+        "duration": 3,
+        "opacity": 1,
         "speed": 3
       },
       "repulse": {
@@ -180,7 +186,7 @@ particlesJS("particles-js", {
         "duration": 0.4
       },
       "push": {
-        "particles_nb": 4
+        "particles_nb": 2
       },
       "remove": {
         "particles_nb": 2
