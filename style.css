@@ -1,181 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
+
 :root {
   --primary-font: 'Poppins', sans-serif;
-  --secondary-font: 'Black Ops One', cursive;
-  --background-color: rgb(16, 15, 23);
-  --purple-medium: mediumpurple;
-  --purple-light: rgb(161, 119, 252);
+  --title-font: 'Black Ops One', cursive;
+  --background-color: #121212;
   font-size: 16px;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: var(--primary-font);
 }
-
-html {
-  background: var(--background-color);
-  overflow-x: hidden;
-}
-
-body {
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  overflow-x: hidden;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-main {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-}
-
-.item {
-  width: 15.625%;
-  height: 21.164%;
-  list-style-type: none;
-  position: absolute;
-  top: 20.873%;
-  left: 82%;
-  transform: translateY(-50%);
-  z-index: 1;
-  background-position: center;
-  background-size: cover;
-  border-radius: 20px;
-  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
-  transition: all 0.5s;
-  
-  &:nth-child(1), &:nth-child(2) {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: none;
-    border-radius: 0;
-    box-shadow: none;
-    opacity: 1;
-  }
-
-  &:nth-child(3) { top: 15.582%; }
-  &:nth-child(4) { top: 38.862%; }
-  &:nth-child(5) { top: 62.143%; }
-  &:nth-child(6) { top: 85.423%; }
-  &:nth-child(7) { top: 108.703%; opacity: 0; }
-  &:nth-child(8) { top: 131.984%; opacity: 0; }
-  &:nth-child(9) { top: 155.265%; opacity: 0; }
-  &:nth-child(10) { top: 178.546%; opacity: 0; }
-  &:nth-child(11) { top: 201.827%; opacity: 0; }
-}
-
-#particles-js{
+body{
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  background: var(--background-color);
+  overflow-x: hidden;
 }
 
-.content {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  font: var(--primary-font);
-  color: white;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
-  opacity: 0;
-  display: none;
 
-  & .LV {
-    line-height: 1.7;
-    margin: 1rem 0 1.5rem;
-    font-size: 1.1rem;
-    position: relative;
-    width: fit-content;
-    
-    top: 15%;
-    left: 10%;
-    text-decoration: none;
-    color: white;
-    font-weight: 550;
-    padding: 10px 15px;
-    transition: color 0.5s ease;
+#slider {
+  position: fixed;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 750px;
+  height: 460px;
+  overflow-x: hidden; /* Allow scrolling */
+  background-color: #ffffff; /* White background */
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  color: #000000; /* Black text */
+  box-sizing: border-box;
+  padding: 20px; /* Add some padding */
 
-    display: flex;
-    flex-direction: column;
+  & .slide {
+    display: none;
+    width: 100%;
+    height: auto; /* Allow the height to adjust based on content */
+    padding: 10px 15px; /* Add some padding */
+    margin-bottom: 20px; /* Add some space between slides */
+    border: 1px solid #dddddd; /* Add a border */
+    border-radius: 5px; /* Round the corners */
 
-    &:hover{
-      color: #ff0000;
-      font-weight: 600;
+    & .slideTitle {
+      font-family: var(--title-font);
+      font-size: 5vh;
+      margin-bottom: 10px;
+      width: 100%;
+      height: 10%;
+      padding: 10px;
+    }
+
+    & .slideContent {
+      font-family: var(--primary-font);
+      font-size: 1.1rem;
+      font-weight: 550;
+      color: black;
+
+      margin-bottom: 10px;
+      width: 100%;
+      height: 10%;
+      padding: 10px;
+      position: relative;
+      left: 25px;
+
+      display: flex;
+      flex-direction: column;
+
+      transition: color 0.5s ease;
+
+      &:hover{
+        color: #ff0000;
+        font-weight: 600;
+      }
     }
   }
-
-  & .title{
-    display: flex;
-    flex-direction: column;
-    padding: 10px 15px;
-
-    position: relative;
-    left: 3.91%;
-    top: 7.94%;
-
-    font-family: var(--secondary-font);
-    font-size: clamp(3rem, 6vw, 10rem);
-    padding: 0rem clamp(1rem, 2vw, 3rem);
-    border-radius: clamp(0.4rem, 0.75vw, 1rem);
-    color: white;
-
-    z-index: 9;
-  }
-}
-
-.item:nth-of-type(2) .content {
-  display: block;
-  animation: show 0.5s ease-in-out 0.5s forwards;
-}
-
-@keyframes show {
-  0% {
-    filter: blur(5px);
-    transform: translateY(calc(-50% + 75px));
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
+  
+  & .slide.active {
+    display: block;
   }
 }
 
 .nav {
   position: absolute;
-  bottom: 6.35%;
-  left: 45%;
+  bottom: 5.5%;
+  left: 50%;
   transform: translateX(-50%);
-  user-select: none;
-  z-index: 5;
+
   display: flex;
   justify-content: center;
   transition: all 0.5s ease;
 
   & .btn {
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: transparent;
     color: crimson;
     padding: 10px 10px;
     margin-left: 0.5rem;
-    border-radius: 5px;
-    resize: both;
+    border-radius: 12.5%;
     cursor: pointer;
     align-items: center;
-    transition: visibility 0s, opacity 0.5s linear, background-color 0.5s linear;
+    transition: background-color 0.5s linear;
 
     &:hover {
       background-color: black;
@@ -190,14 +120,14 @@ main {
   }
 }
 
-.mini-title{
-  font: var(--primary-font);
+.tooltipTitle {
+  font-family: var(--primary-font);
   color: white;
   text-shadow: 0 3px 8px rgba(0,0,0,0.5);
 
   position: absolute;
-  bottom: 13.23%;
-  left: 45%;
+  bottom: 13%;
+  left: 50%;
   transform: translateX(-50%);
   font-size: 1.7rem;
   font-weight: 750;
