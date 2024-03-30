@@ -1,0 +1,124 @@
+<!DOCTYPE html> <!-- Definira tip dokumenta kao HTML -->
+<html lang="hrv"> <!-- Postavlja jezik dokumenta na hrvatski -->
+<head>
+	<meta charset="UTF-8"> <!-- Postavlja karakternu šifru dokumenta na UTF-8 -->
+	<link rel="stylesheet" href="styles.css"> <!-- Uključuje vanjski CSS stil za oblikovanje stranice -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Uključuje vanjski CSS stil ikona iz Font Awesome biblioteke -->
+	<link rel="icon" type="image/png" href="../Slike/circle.png"> <!-- Postavlja ikonu stranice -->
+	<title>SEMINARSKI RAD - WebSphere</title> <!-- Postavlja naslov stranice -->
+
+</head>
+<body>
+    <div class="container">
+		<div class="title" style="margin-top: 67px; font-size: 1.9em;">APLIKACIJA ZA MORSEOVO KODIRANJE I DEKODIRANJE</div>
+		<div class="input-output">
+			<div class="input-label-container">
+				<label class="input-output-label">Tekst</label>
+				<div class="textarea-container">
+					<textarea id="text" class="text-textarea"></textarea> <!-- Polje za unos teksta -->
+				</div>
+				<div class="options">
+					<span class="option" onclick="clearText()"><i class="fas fa-trash"></i></span> <!-- Ikona za brisanje teksta + pozivanje funkcija za to-->
+					<span class="option" onclick="copyText('text')"><i class="fas fa-copy"></i></span> <!-- Ikona za kopiranje teksta + pozivanje funkcija za to-->
+				</div>
+			</div>
+			<div class="input-label-container">
+				<label class="input-output-label">Morseov kod</label>
+				<div class="textarea-container">
+					<textarea id="morse-code" class="morse-textarea"></textarea> <!-- Polje za unos Morseovog koda -->
+				</div>
+				<div class="options">
+					<span class="option" onclick="clearText()"><i class="fas fa-trash"></i></span> <!-- Ikona za brisanje morseovog koda + pozivanje funkcije za to-->
+					<span class="option" onclick="copyText('morse-code')"><i class="fas fa-copy"></i></span> <!-- Ikona za kopiranje morseovog koda + pozivanje funkcije za to -->
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="title">DODATNE MOGUĆNOSTI</div>
+        <div class="options-container">
+			<div class="option-input">
+				<label for="dotSymbol">Točka</label>
+				<input type="text" id="dotSymbol" placeholder="Nefunkcionalno">
+				<p class="option-description">Unosom bilo kojeg znaka u ovu opciju mijenja se simbol točke u Morseovom kodu. Trenutno ne radi.</p>
+			</div>
+			<div class="option-input">
+				<label for="dashSymbol">Crtica</label>
+				<input type="text" id="dashSymbol" placeholder="Nefunkcionalno">
+				<p class="option-description">Unosom bilo kojeg znaka u ovu opciju mijenja se simbol crtice u Morseovom kodu. Trenutno ne radi.</p>
+			</div>
+			<div class="option-input">
+				<label for="spaceSymbol">Međuslovni razmak</label>
+				<input type="text" id="spaceSymbol">
+				<p class="option-description">Unosom bilo kojeg znaka u ovu opciju mijenja se simbol razmaka između slova u Morseovom kodu.</p>
+			</div>
+			<div class="option-input">
+				<label for="separatorSymbol">Međuriječni razmak</label>
+				<input type="text" id="separatorSymbol">
+				<p class="option-description">Unosom bilo kojeg znaka u ovu opciju mijenja se simbol razmak a između riječi u Morseovom kodu.</p>
+			</div>
+        </div>
+		<p class="text-to-read">Napomena: Unos dva ili više znakova u isto polje ili istih znakova u više različitih polja nije dopušten.</p>
+		
+		<div class="title">KORIŠTENJE APLIKACIJE</div>
+		<div class="how-to-morse">
+			<div class="mini-title">Kodiranje Teksta</div>
+			<li class="text-to-read">Korisnici mogu unijeti željeni tekst u odgovarajuće tekstualno polje, nakon čega će aplikacija automatski generirati odgovarajući Morseov kod. Korisnici mogu pratiti promjene u stvarnom vremenu dok unose tekst.</li>
+
+			<div class="mini-title">Dekodiranje Morseovog Koda</div>
+			<li class="text-to-read">Suprotno kodiranju, korisnici mogu unijeti Morseov kod u odgovarajuće polje, a zatim će aplikacija automatski dekodirati kod i prikazati odgovarajući tekst. Opet, ova funkcionalnost omogućuje praćenje promjena u stvarnom vremenu.</li>
+
+			<div class="mini-title">Prilagodljivi Simboli</div>
+			<li class="text-to-read">Aplikacija omogućuje korisnicima da prilagode simbole za točku (trenutno nefunkcionalno), crticu (trenutno nefunkcionalno), razmak između znakova i razmak između riječi. Ovo pruža mogućnost korisnicima koji žele koristiti svoje simbole umjesto standardnih.</li>
+			
+			<div class="mini-title">Automatsko kopiranje i brisanje</div>
+			<li class="text-to-read">Također aplikacija omogućuje korisnicima da pritiskom na odgovarajuće ikone automatski kopiraju ili izbrišu željeni tekst bez nekih dodatnih radnji.</li>
+
+			<div class="mini-title">Automatsko generiranje tablice</div>
+			<li class="text-to-read">Aplikacija ima funkciju za automatsko generiranje tablice koristeći već postojeći rječnik ('dictionary') s listom slova i njihovim "prijevodom" u ovom slučaju njihov morseov kod</li>
+
+			<a href="https://github.com/n1ko-josipovic/WebSphere" class="mini-title-hyperlink">Programski kod - Objašnjenje programskog koda</a>
+			<li class="text-to-read">Programski kod aplikacije napisan je u HTML, CSS i JavaScript. Korišten je jednostavan rječnik ("dictionary") koji mapira slova, brojeve i neke posebne znakove na njihove Morseove ekvivalente i obrnuto.</li>
+		</div>
+
+		<div class="title" style="margin-bottom: 70px;">MORSEOVA ABECEDA - PRODUŽENA VERZIJA</div>
+		<div class="morse-grid" id="morseTable">
+			<!-- Morseova abeceda će biti generirana ovdje -->
+		</div>
+
+		<div class="title">O MORSEOVOM KODU</div>
+		<div class="about-morse" style="margin-bottom: 100px;">
+			<div class="mini-title">Povijest</div>
+			<li class="text-to-read">Morseov je kod izumio slikar Samuel Morse uz pomoć Alfreda Vaila, američkog strojara i izumitelja.</li>
+			<li class="text-to-read">Razlog izuma Morseovog koda je taj što Samuel M. nije na vrijeme dobio ženina pisma, pa tako nije bio prisutan kada je preminula.</li>
+			<li class="text-to-read">Koristio se za prijenos poruka putem telegrafskih linija.</li>
+
+			<div class="mini-title">Osnovna Struktura</div>
+			<li class="text-to-read">Sastoji se od kombinacija točaka (.), crta (-) i razmaka ( ), koji čine osnovne elemente.</li>
+			<li class="text-to-read">Ovi elementi tvore slova, brojeve i druge znakove, a znakovi se grupiraju u riječi.</li>
+
+			<div class="mini-title">Znakovi</div>
+			<li class="text-to-read">Svako slovo i broj ima svoj jedinstveni Morseov kod, kao što možemo vidjeti u tablici Morseove abecede</li>
+			<li class="text-to-read">Na primjer, A je .-, dok je 1 .----</li>
+
+			<div class="mini-title">Komunikacija</div>
+			<li class="text-to-read">Standardiziran je 1865. godine kako bi se omogućila globalna komunikacija.</li>
+			<li class="text-to-read">Komunikacija je bila omogućena putem svjetla, zvuka ili električnih impulsa.</li>
+
+			<div class="mini-title">Široka Primjena</div>
+			<li class="text-to-read">Osim za prijenos poruka putem telegrafskih linija imala je široku primjenu posebno u vojsci, npr. bio je široko korišten u pomorskoj signalizaciji, omogućujući brzu razmjenu informacija između brodova.</li>
+			<li class="text-to-read">Iako se njegova upotreba smanjila, još uvijek ima svoje mjesto u modernim vremenima. Radioamateri ga i dalje koriste, a često se pojavljuje u popularnoj kulturi, filmovima, pa čak i kao "easter eggs" u softverskim programima. Ostaje nostalgičan, ali praktičan medij komunikacije.</li>
+
+			<div class="mini-title">Morseova Brzina</div>
+			<li class="text-to-read">Brzina prijenosa Morseovog koda izražava se u "Words Per Minute" (WPM) ili "Characters Per Minute" (CPM).</li>
+
+			<div class="mini-title">Najpoznatija poruka - SOS</div>
+			<li class="text-to-read">SOS predstavlja signal za pomoć u međunarodnoj Morseovoj abecedi i globalno je prepoznat kao poziv u pomoć. Prvi put usvojen od strane Njemačke Vlade 1905. godine.</li>
+			<li class="text-to-read">Iako neki ljudi misle da je SOS kratica za "Spasite naše duše" ili "Spasite naš brod", njegova slova nemaju značenje.</li>
+			<li class="text-to-read">Signal za pomoć SOS predstavlja se kao "... --- ..." u Morseovoj abecedi. Ovaj niz od tri točke, tri crtice i tri točke služi kao univerzalni poziv u pomoć.</li>
+		</div>
+    </div>
+
+    <script src="script.js"></script>  <!-- Uključuje JavaScript datoteku za dodatne funkcionalnosti -->
+</body>
+</html>
